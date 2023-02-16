@@ -230,7 +230,7 @@ function findPersonFamily(person, people) {
         let findSiblings = foundSiblings(person, people);
     }
 
-    let personFamily = `Spouse: ${person.spouse}\n`;
+    let personFamily = `Spouse: ${people.spouse}\n`;
     personFamily += `Parent: ${person.parents}\n`;
     personFamily += `Sibling: ${person.siblings}\n`;
 
@@ -241,7 +241,8 @@ function findPersonFamily(person, people) {
 
 
 function findPersonDescendants(person, people) {
-    let findDescendants = findDescendants(person, people);
+    let findDescendants = foundDescendants(person, people);
+
 }
 
 function searchByTraits(person, people){
