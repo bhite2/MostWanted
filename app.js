@@ -191,22 +191,7 @@ function chars(input) {
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
-function findPersonFamily(person, people) {
-    debugger;
-    let findSpouse = findSpouse(person, people);
-    let findParents = findParents(person, people);
-    if (findParents[0]){
-        let findSiblings = findSiblings(person, people);
-    }
-
-    personFamily = `Spouse: ${person.spouse}\n`
-    personFamily += `Parent: ${person.parents}\n`
-    personFamily += `Sibling: ${person.siblings}\n`
-
-
-}
-
-function findSpouse(person, people){
+function foundSpouse(person, people){
     let spouse = people.filter(function(el){
         if (person.currentSpouse === el.id){
             return true;
@@ -216,19 +201,44 @@ function findSpouse(person, people){
 }
    
 
-function findParents(person, people){
-    let parents = people.filter((item) => {
-        if(person.parents.includes(item.id)) {
-          parents.push(item)
+function foundParents(person, people){
+    let parents = people.filter(function(el) {
+        if(person.parents.includes(el.id)) {
           return true;
         } 
       })
+      return parents;
 }
 
 
-function findSiblings(person, people){
-    
+function foundSiblings(person, people){
+    let siblings = people.filter(function(el) {
+        for(let i = 0; i < person.parents.length; i++) {
+          if(el.parents.includes(person.parents[i])){
+            return true;
+          }
+        }
+      })
+      return siblings;
+    }
+
+function findPersonFamily(person, people) {
+    debugger;
+    let findSpouse = foundSpouse(person, people);
+    let findParents = foundParents(person, people);
+    if (findParents[0]){
+        let findSiblings = foundSiblings(person, people);
+    }
+
+    let personFamily = `Spouse: ${person.spouse}\n`;
+    personFamily += `Parent: ${person.parents}\n`;
+    personFamily += `Sibling: ${person.siblings}\n`;
+
+    return personFamily
+
+
 }
+
 
 function findPersonDescendants(person, people) {
     let findDescendants = findDescendants(person, people);
