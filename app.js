@@ -336,4 +336,16 @@ function searchByTraits(people){
         }
 
         return searchResults;
-    }
+}
+
+function foundGender(people){
+    let searchPrompt = promptFor(
+        'Choose male or female:', chars)
+    
+    let searchResults = people.filter(function(people){
+        if(people.gender === searchPrompt){
+            return true;
+        }
+    })
+    return searchResults;
+}
