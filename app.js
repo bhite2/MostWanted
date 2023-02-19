@@ -280,7 +280,60 @@ function findPersonDescendants(person, people) {
     return personDescendants;
 }
 
-function searchByTraits(person, people){
+function searchByTraits(people){
+    let searchResults = people;
+    while(searchResults.length === 0 || searchResults.length > 1){
+        let searchTrait = promptFor(
+            'What trait do you want to search by: gender, dob, height, weight, eye color, occupation or return to main menu', chars);
+        switch(searchTrait){
+            case 'main menu':
+                return app(people);
+            case 'gender':
+                searchResults = getGender(searchResults)
+                if(searchResults.length != 0){
+                    alert(getResults(searchResults))
+                    break;
+                }
+                else;
+                return searchByTraits(people);
+            case 'dob':
+                searchResults = getDOB(searchResults)
+                if(searchResults.length != 0){
+                    alert(getResults(searchResults))
+                    break;
+                }
+                else;
+                return searchByTraits(people);
+            case 'height':
+                searchResults = getHeight(searchResults)
+                if(searchResults.length != 0){
+                    alert(getResults(searchResults))
+                    break;
+                }
+                else;
+                return searchByTraits(people);
+            case 'weight':
+                searchResults = getWeight(searchResults)
+                if(searchResults.length != 0){
+                    alert(getResults(searchResults))
+                    break;
+                }
+                else;   
+                return searchByTraits(people);
+            case 'eye color':
+                searchResults = getEyeColor(searchResults)
+                if(searchResults.length != 0){
+                    alert(getResults(searchResults))
+                    break;
+                }
+                else;
+                return searchByTraits(people);
+            default:
+                return app(people);
+            
+            
+            }
+        }
 
-}
-
+        return searchResults;
+    }
