@@ -374,12 +374,24 @@ function foundDOB(people){
     return searchResults;
 }
 
-function getDOB(people){
+function foundHeight(people){
     let searchPrompt = promptFor(
-        'Enter dob:', chars
+        'Enter height:', chars
     )
     let searchResults = people.filter(function(people){
-        if(people.dob === searchPrompt){
+        if(people.height === searchPrompt){
+            return true;
+        }
+    })
+    return searchResults;
+}
+
+function foundWeight(people){
+    let searchPrompt = promptFor(
+        'Enter weight:', chars
+    )
+    let searchResults = people.filter(function(people){
+        if(people.weight === searchPrompt){
             return true;
         }
     })
