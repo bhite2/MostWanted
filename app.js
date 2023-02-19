@@ -373,3 +373,15 @@ function foundDOB(people){
     })
     return searchResults;
 }
+
+function getDOB(people){
+    let searchPrompt = promptFor(
+        'Enter dob:', chars
+    )
+    let searchResults = people.filter(function(people){
+        if(people.dob === searchPrompt){
+            return true;
+        }
+    })
+    return searchResults;
+}
