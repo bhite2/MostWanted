@@ -223,7 +223,6 @@ function foundSiblings(person, people){
     }
 
 function findPersonFamily(person, people) {
-    debugger;
     let findSpouse = foundSpouse(person, people);
     let personFamily = `Spouse: ${findSpouse[0].firstName} ${findSpouse[0].lastName}\n`;
     let findParents = foundParents(person, people);
@@ -238,16 +237,47 @@ function findPersonFamily(person, people) {
     }
 
     return personFamily
-
-
 }
 
-
 function findPersonDescendants(person, people) {
-    let findDescendants = foundDescendants(person, people);
+    let foundGrandChildrencopy = [];
+    let descendantsCopy = people
+    let foundChildren = people.filter(function(people){
+        for(let i = 0; i < people.parents.length; i++){
+            if(person.id == people.parents[i]){
+                let foundChildrenCopy = people
+                let foundGrandChildren = descendantsCopy.filter(function(people){
+                    for(let j = 0; j < people.parents.length; j++){
+                        if(foundChildrenCopy.id == people.parents[j]){
+                            foundGrandChildrencopy.push(people);
+                            return true;
+                        }
+                
+        }  
+         
+    })
+    return true;
+    }}
 
-    let personDescendants = ``
+    })
+    let personDescendants = '';
+    if(foundChildren.length === 0){
+        personDescendants += "Has no children\n";
+    }
+    else{
+        personDescendants += `Children: ${foundChildren[0].firstName}  ${foundChildren[0].lastName}\n`;
+        for(let i = 1; i <foundChildren.length; i++){
+            personDescendants += `Children: ${foundChildren[i].firstName}  ${foundChildren[i].lastName}\n`;     
+            }}
+    if(foundGrandChildrencopy.length === 0){
+            personDescendants += "Has no Grandchildren";
+        }
+    else{
+        for(let i = 0; i <foundGrandChildrencopy.length; i++){
+            personDescendants += `Grandchildren: ${foundGrandChildrencopy[i].firstName}  ${foundGrandChildrencopy[i].lastName}\n`;     
+        }}
 
+    return personDescendants;
 }
 
 function searchByTraits(person, people){
