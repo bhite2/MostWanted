@@ -397,3 +397,27 @@ function foundWeight(people){
     })
     return searchResults;
 }
+
+function foundEyeColor(people){
+    let searchPrompt = promptFor(
+        'Choose an eye color :  blue, brown, black, green, hazel', chars
+    )
+    let searchResults = people.filter(function(people){
+        if(people.eyeColor === searchPrompt){
+            return true;
+        }
+    })
+    return searchResults;
+}
+
+function foundOccupation(people){
+    let searchPrompt = promptFor(
+        'Enter the occupation you are looking for:', chars
+    )
+    let searchResults = people.filter(function(people){
+        if(people.occupation === searchPrompt){
+            return true;
+        }
+    })
+    return searchResults;
+}
