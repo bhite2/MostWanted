@@ -225,14 +225,17 @@ function foundSiblings(person, people){
 function findPersonFamily(person, people) {
     debugger;
     let findSpouse = foundSpouse(person, people);
+    let personFamily = `Spouse: ${findSpouse[0].firstName} ${findSpouse[0].lastName}\n`;
     let findParents = foundParents(person, people);
+    for(let i = 0; i < foundParents.length; i++){
+        personFamily += `Parent: ${findParents[i].firstName} ${findParents[i].lastName}\n`;
+    }
     if (findParents[0]){
         let findSiblings = foundSiblings(person, people);
+        for(let i = 0; i < foundSiblings.length; i++){
+            personFamily += `Sibling: ${findSiblings[i].firstName} ${findSiblings[i].lastName}\n`;
+        }
     }
-
-    let personFamily = `Spouse: ${people.spouse}\n`;
-    personFamily += `Parent: ${person.parents}\n`;
-    personFamily += `Sibling: ${person.siblings}\n`;
 
     return personFamily
 
@@ -242,6 +245,8 @@ function findPersonFamily(person, people) {
 
 function findPersonDescendants(person, people) {
     let findDescendants = foundDescendants(person, people);
+
+    let personDescendants = ``
 
 }
 
