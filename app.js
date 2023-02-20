@@ -239,46 +239,6 @@ function findPersonFamily(person, people) {
     return personFamily
 }
 
-function findPersonDescendants(person, people) {
-    let descendants = people
-    let findChildren = people.filter(function(people){
-        for(let i = 0; i < people.parents.length; i++){
-            if(person.id == people.parents[i]){
-                let foundChildrenCopy = people
-                let foundGrandChildren = descendants.filter(function(people){
-                    for(let j = 0; j < people.parents.length; j++){
-                        if(foundChildrenCopy.id == people.parents[j]){
-                            foundGrandChildren.push(people);
-                            return true;
-                        }
-                
-        }  
-         
-    })
-    return true;
-    }}
-
-    })
-    let personDescendants = '';
-    if(findChildren.length === 0){
-        personDescendants += "Has no children\n";
-    }
-    else{
-        personDescendants += `Children: ${findChildren[0].firstName}  ${findChildren[0].lastName}\n`;
-        for(let i = 1; i <foundChildren.length; i++){
-            personDescendants += `Children: ${findChildren[i].firstName}  ${findChildren[i].lastName}\n`;     
-            }}
-    if(foundGrandChildrencopy.length === 0){
-            personDescendants += "Has no Grandchildren";
-        }
-    else{
-        for(let i = 0; i <foundGrandChildrencopy.length; i++){
-            personDescendants += `Grandchildren: ${foundGrandChildrencopy[i].firstName}  ${foundGrandChildrencopy[i].lastName}\n`;     
-        }}
-
-    return personDescendants;
-}
-
 function searchByTraits(people){
     let searchResults = people;
     while(searchResults.length === 0 || searchResults.length > 1){
