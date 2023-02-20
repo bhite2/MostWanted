@@ -240,16 +240,15 @@ function findPersonFamily(person, people) {
 }
 
 function findPersonDescendants(person, people) {
-    let foundGrandChildrencopy = [];
-    let descendantsCopy = people
-    let foundChildren = people.filter(function(people){
+    let descendants = people
+    let findChildren = people.filter(function(people){
         for(let i = 0; i < people.parents.length; i++){
             if(person.id == people.parents[i]){
                 let foundChildrenCopy = people
-                let foundGrandChildren = descendantsCopy.filter(function(people){
+                let foundGrandChildren = descendants.filter(function(people){
                     for(let j = 0; j < people.parents.length; j++){
                         if(foundChildrenCopy.id == people.parents[j]){
-                            foundGrandChildrencopy.push(people);
+                            foundGrandChildren.push(people);
                             return true;
                         }
                 
@@ -261,13 +260,13 @@ function findPersonDescendants(person, people) {
 
     })
     let personDescendants = '';
-    if(foundChildren.length === 0){
+    if(findChildren.length === 0){
         personDescendants += "Has no children\n";
     }
     else{
-        personDescendants += `Children: ${foundChildren[0].firstName}  ${foundChildren[0].lastName}\n`;
+        personDescendants += `Children: ${findChildren[0].firstName}  ${findChildren[0].lastName}\n`;
         for(let i = 1; i <foundChildren.length; i++){
-            personDescendants += `Children: ${foundChildren[i].firstName}  ${foundChildren[i].lastName}\n`;     
+            personDescendants += `Children: ${findChildren[i].firstName}  ${findChildren[i].lastName}\n`;     
             }}
     if(foundGrandChildrencopy.length === 0){
             personDescendants += "Has no Grandchildren";
@@ -284,12 +283,12 @@ function searchByTraits(people){
     let searchResults = people;
     while(searchResults.length === 0 || searchResults.length > 1){
         let searchTrait = promptFor(
-            'What trait do you want to search by: gender, dob, height, weight, eye color, occupation or return to main menu', chars);
+            'What trait do you want to search by: gender, dob, height, weight, eyeColor, occupation or return to main menu', chars);
         switch(searchTrait){
             case 'main menu':
                 return app(people);
             case 'gender':
-                searchResults = getGender(searchResults)
+                searchResults = foundGender(searchResults)
                 if(searchResults.length != 0){
                     alert(getResults(searchResults))
                     break;
@@ -297,7 +296,7 @@ function searchByTraits(people){
                 else;
                 return searchByTraits(people);
             case 'dob':
-                searchResults = getDOB(searchResults)
+                searchResults = foundDOB(searchResults)
                 if(searchResults.length != 0){
                     alert(getResults(searchResults))
                     break;
@@ -305,7 +304,7 @@ function searchByTraits(people){
                 else;
                 return searchByTraits(people);
             case 'height':
-                searchResults = getHeight(searchResults)
+                searchResults = foundHeight(searchResults)
                 if(searchResults.length != 0){
                     alert(getResults(searchResults))
                     break;
@@ -313,21 +312,29 @@ function searchByTraits(people){
                 else;
                 return searchByTraits(people);
             case 'weight':
-                searchResults = getWeight(searchResults)
+                searchResults = foundWeight(searchResults)
                 if(searchResults.length != 0){
                     alert(getResults(searchResults))
                     break;
                 }
                 else;   
                 return searchByTraits(people);
-            case 'eye color':
-                searchResults = getEyeColor(searchResults)
+            case 'eyeColor':
+                searchResults = foundEyeColor(searchResults)
                 if(searchResults.length != 0){
                     alert(getResults(searchResults))
                     break;
                 }
                 else;
                 return searchByTraits(people);
+            case 'occupation':
+                searchResults = foundOccupation(searchResults)
+                if(searchResults.length != 0){
+                    alert(getResults(searchResults))
+                    break;
+                }
+                else;
+                return searchByTraits(people);    
             default:
                 return app(people);
             
@@ -344,18 +351,6 @@ function foundGender(people){
     
     let searchResults = people.filter(function(people){
         if(people.gender === searchPrompt){
-            return true;
-        }
-    })
-    return searchResults;
-}
-
-function getDOB(people){
-    let searchPrompt = promptFor(
-        'Enter dob:', chars
-    )
-    let searchResults = people.filter(function(people){
-        if(people.dob === searchPrompt){
             return true;
         }
     })
@@ -420,4 +415,13 @@ function foundOccupation(people){
         }
     })
     return searchResults;
+}
+
+function getResults(searchResults){
+    let display = `Name: ${searchResults[0].firstName} ${searchResults[0].lastName}\n`;
+    for(let i = 1;i < searchResults.length;i++){
+        display += `Name: ${searchResults[i].firstName} ${searchResults[i].lastName}\n`;
+
+    }
+    return display;
 }
