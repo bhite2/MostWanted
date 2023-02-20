@@ -214,7 +214,7 @@ function foundParents(person, people){
 function foundSiblings(person, people){
     let siblings = people.filter(function(el) {
         for(let i = 0; i < person.parents.length; i++) {
-          if(el.parents.includes(person.parents[i])){
+          if(el.parents.includes(person.parents[i]) && el.id != person.id){
             return true;
           }
         }
@@ -238,6 +238,24 @@ function findPersonFamily(person, people) {
 
     return personFamily
 }
+
+function foundDescendants(person, people){
+    let children = people.filter(function(people) {
+        if(person.id === people.id) {
+          return true;
+        } 
+      })
+      return children;
+}
+
+function findPersonDescendants(person, people){
+    let findChildren = foundDescendants(person, people)
+    for(let i = 0; i <= foundDescendants.length; i++){
+        let personDescendants = `${findChildren.firstName[i]} ${findChildren.lastName[i]}`;
+     }
+     return personDescendants
+}
+
 
 function searchByTraits(people){
     let searchResults = people;
