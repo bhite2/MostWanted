@@ -192,7 +192,7 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
 function foundSpouse(person, people){
-    let spouse = people.filter(function(el){
+    let spouse = people.filter(function(people){
         if (person.currentSpouse === el.id){
             return true;
         }
@@ -236,24 +236,27 @@ function findPersonFamily(person, people) {
         }
     }
 
-    return personFamily
+    return personFamily;
 }
 
 function foundDescendants(person, people){
-    let children = people.filter(function(people) {
-        if(person.id === people.id) {
-          return true;
-        } 
-      })
+    let children = people.filter(function(people){
+        for(let i = 0; i < people.parents.length; i++){
+            if(person.id === people.parents[i]){
+                return true;
+            }
+        }
+    })
       return children;
 }
 
 function findPersonDescendants(person, people){
-    let findChildren = foundDescendants(person, people)
-    for(let i = 0; i <= foundDescendants.length; i++){
-        let personDescendants = `${findChildren.firstName[i]} ${findChildren.lastName[i]}`;
-     }
-     return personDescendants
+    let findChildren = foundDescendants(person, people);
+    let personDescendants = ""
+    for(let i = 0; i < findChildren.length; i++){
+        personDescendants += `${findChildren[i].firstName} ${findChildren[i].lastName}\n`;
+    }
+    return personDescendants;
 }
 
 
